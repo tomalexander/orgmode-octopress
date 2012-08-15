@@ -1,0 +1,1 @@
+This is an exporter for Emacs Org-Mode to Octopress. For setup instructions go to http://blog.paphus.com/blog/2012/08/01/introducing-octopress-blogging-for-org-mode/
