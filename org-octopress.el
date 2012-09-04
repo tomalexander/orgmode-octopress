@@ -2696,9 +2696,9 @@ See `org-publish-org-to' to the list of arguments."
     (setq separated (mapcar
                      #'(lambda (org-line)
                          (if (and (not in_code_block)
-                                  (string-match "^[ \t]*#\\+begin_src[ \t]*\\([^\n \t]+\\)" org-line))
+                                  (string-match "^[ \t]*#\\+\\(begin_src\\|BEGIN_SRC\\)[ \t]*\\([^\n \t]+\\)" org-line))
                              (progn (print org-line)
-                                    (let* ((lang (match-string 1 org-line))
+                                    (let* ((lang (match-string 2 org-line))
                                            (title nil)
                                            (url nil)
                                            (urltext nil)
@@ -2707,12 +2707,12 @@ See `org-publish-org-to' to the list of arguments."
                                           org-line
                                         (progn
                                           (setq in_code_block t)
-                                          (if (string-match ":title[ \t]+\\([^:]+\\)" org-line)
-                                              (progn (print "TITLE") (setq title (match-string 1 org-line))))
-                                          (if (string-match ":url[ \t]+\\([^\n \t]+\\)" org-line)
-                                              (setq url (match-string 1 org-line)))
-                                          (if (string-match ":urltext[ \t]+\\([^:]+\\)" org-line)
-                                              (setq urltext (match-string 1 org-line)))
+                                          (if (string-match ":\\(title\\|TITLE\\)[ \t]+\\([^:]+\\)" org-line)
+                                              (progn (print "TITLE") (setq title (match-string 2 org-line))))
+                                          (if (string-match ":\\(url\\|URL\\)[ \t]+\\([^\n \t]+\\)" org-line)
+                                              (setq url (match-string 2 org-line)))
+                                          (if (string-match ":\\(urltext\\|URLTEXT\\)[ \t]+\\([^:]+\\)" org-line)
+                                              (setq urltext (match-string 2 org-line)))
                                           (concat "#+begin_html\n{% codeblock " (if title (concat title " ") "") "lang:" (change-source-name lang) " "  (if url (concat url " ") "") (if urltext (concat urltext " ") "") "%}")
                                           )
                                         )
@@ -2720,9 +2720,9 @@ See `org-publish-org-to' to the list of arguments."
                                       )
                                     )
                            (if (and in_code_block
-                                    (string-match "[ \t]*#\\+end_src" org-line))
+                                    (string-match "[ \t]*#\\+\\(end_src\\|END_SRC\\)" org-line))
                                (progn (setq in_code_block nil)
-                                      (replace-match "{% endcodeblock %}\n#+end_html" nil nil org-line)
+                                      (replace-match "{% endcodeblock %}\n#+end_html" t nil org-line)
                                       )
                              org-line
                              )
