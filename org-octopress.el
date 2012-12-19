@@ -3,6 +3,7 @@
 ;; Copyright (C) 2004-2012 Free Software Foundation, Inc.
 
 ;; Author: Tom Alexander <tomalexander at paphus dot com>
+;; Version: 0.1
 ;; 99 percent of the code is org-html.el
 
 ;; org-html.el credits:
