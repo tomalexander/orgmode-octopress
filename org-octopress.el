@@ -1101,13 +1101,13 @@ OPT-PLIST is the export options list."
 (defvar org-heading-keyword-regexp-format) ; defined in org.el
 
 ;;;###autoload
-(defun org-export-as-octopress (arg &optional hidden ext-plist
+(defun org-export-as-octopress (arg &optional ext-plist
 			       to-buffer body-only pub-dir)
   "Export the outline as a pretty HTML file.
 If there is an active region, export only the region.  The prefix
 ARG specifies how many levels of the outline should become
 headlines.  The default is 3.  Lower levels will become bulleted
-lists.  HIDDEN is obsolete and does nothing.
+lists.
 EXT-PLIST is a property list with external parameters overriding
 org-mode's default settings, but still inferior to file-local
 settings.  When TO-BUFFER is non-nil, create a buffer with that
