@@ -1928,6 +1928,10 @@ PUB-DIR is set, use this as the publishing directory."
       ;; Remove empty lines at the beginning of the file.
       (goto-char (point-min))
       (when (looking-at "\\s-+\n") (replace-match ""))
+      ;; correct excerpts
+      (goto-char (point-min))
+      (while (re-search-forward "&lt;!&ndash;\\s-*more\\s-*&ndash;&gt;" nil t)
+	(replace-match "<!-- more -->"))
       ;; Remove display properties
       (remove-text-properties (point-min) (point-max) '(display t))
       ;; Run the hook
